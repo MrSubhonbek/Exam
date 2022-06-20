@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Bottom from './components/buttons/Buttons'
-import Windows from './components/Windows'
+import { Setting } from './components/setting/Setting'
+import Windows from './components/window/Windows'
+import {BrowserRouter,Route, Routes} from "react-router-dom";
 import s from './styles/App.module.css'
 export default function App() {
     const [count, setCount] = useState<number>(0)
@@ -9,10 +11,13 @@ export default function App() {
     return (
         <div className={s.wrapper}>
             <div className={s.app}>
-                <Windows count={count} />
-                <Bottom
-                    setCount={setCount}
-                    count={count} />
+                <Routes>
+                    <Route path="/" element={<>
+                    <Windows count={count} />
+                    <Bottom setCount={setCount} count={count} />
+                </>} />
+                    <Route path="/setting" element={<Setting/>} />
+                </Routes>              
             </div>
         </div>
     )
