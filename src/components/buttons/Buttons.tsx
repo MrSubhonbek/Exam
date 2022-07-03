@@ -6,19 +6,22 @@ import UniversalButton from './UniversalButton'
 interface IProps {
   setCount: Dispatch<SetStateAction<number>>
   count: number
+  start: number
+  end: number
+  step:number
 }
 export default function Bottom(props: IProps) {
 
   const onClickUpHandler = () => {
-    if (props.count < 5) {
-      props.setCount(() => props.count + 1)
+    if (props.count < props.end) {
+      props.setCount(() => props.count + props.step)
     }
   }
 
-  const onResetHandler = () => props.setCount(0)
+  const onResetHandler = () => props.setCount(props.start)
   const navigate = useNavigate();
-  const styleButtonInc = (props.count > 4) ? (s.disable + " " + s.button) : s.button
-  const styleButtonReset = (props.count === 0) ? (s.disable + " " + s.button) : s.button
+  const styleButtonInc = (props.count >= props.end) ? (s.disable + " " + s.button) : s.button
+  const styleButtonReset = (props.count === props.start) ? (s.disable + " " + s.button) : s.button
 
   return (
     <>
@@ -30,13 +33,3 @@ export default function Bottom(props: IProps) {
     </>
   )
 }
-/*
-export function Setting() {
-  const navigate = useNavigate();
-  return (
-    <div className={s.setting} onClick={()=>navigate('/setting')}>
-      <p>Setting</p>
-    </div>
-  )
-}
-*/ 

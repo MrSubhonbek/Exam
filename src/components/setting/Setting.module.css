@@ -44,3 +44,6 @@
     transition: border-color 0.2s;
     margin-left: 20px;
 }
+.error{
+    color: red;
+}
